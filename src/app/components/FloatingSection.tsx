@@ -88,7 +88,7 @@ export default function FloatingSection() {
             </h4>
             <p className="text-[#676767] text-sm">
               We believe that the future of finance lies in transparency,
-              accessibility, and decentralization. We've made DeFi and RWAs
+              accessibility, and decentralization. We have made DeFi and RWAs
               accessible.
             </p>
           </div>
@@ -129,7 +129,7 @@ export default function FloatingSection() {
             </h4>
             <p className="text-[#676767] text-sm">
               Say goodbye to the hassle of setting up wallets and navigating
-              protocols. We've made DeFi and RWAs accessible in just a few
+              protocols. We have made DeFi and RWAs accessible in just a few
               clicks.
             </p>
           </div>
@@ -170,7 +170,7 @@ export default function FloatingSection() {
             </h4>
             <p className="text-[#676767] text-sm">
               Say goodbye to the hassle of setting up wallets and navigating
-              protocols. We've made DeFi and RWAs accessible in just a few
+              protocols. We have made DeFi and RWAs accessible in just a few
               clicks.
             </p>
           </div>

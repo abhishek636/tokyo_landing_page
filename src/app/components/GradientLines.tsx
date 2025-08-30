@@ -24,10 +24,9 @@ export default function GradientLines({
   const [lines, setLines] = useState<LineData[]>([]);
 
   useEffect(() => {
-    // Generate random values only on client
     const generated = Array.from({ length: lineCount }, (_, i) => {
       const randomDelay = -(Math.random() * duration);
-      const spread = (Math.random() - 0.5) * 150; // px left/right
+      const spread = (Math.random() - 0.5) * 150;
       return {
         left: `${10 + i * (80 / lineCount)}%`,
         delay: `${randomDelay}s`,
@@ -37,7 +36,7 @@ export default function GradientLines({
     setLines(generated);
   }, [lineCount, duration]);
 
-  if (!lines.length) return null; // render nothing on SSR
+  if (!lines.length) return null;
 
   return (
     <div className={`${className} pointer-events-none overflow-hidden`}>
@@ -45,12 +44,14 @@ export default function GradientLines({
         <div
           key={i}
           className={`absolute w-[2px] h-[200px] bg-gradient-to-b ${lineColor} animate-fall`}
-          style={{
-            left: line.left,
-            animationDuration: `${duration}s`,
-            animationDelay: line.delay,
-            ["--spread" as any]: line.spread
-          }}
+          style={
+            {
+              left: line.left,
+              animationDuration: `${duration}s`,
+              animationDelay: line.delay,
+              "--spread": line.spread, // ✅ no `any` needed
+            } as React.CSSProperties // cast once here
+          }
         />
       ))}
 
