@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  --background: #010101;
+  --foreground: #ffffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #010101;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  /* H1 */
+  h1 {
+    @apply text-[60px] md:text-[80px] lg:text-[100px] font-semibold leading-tight;
+  }
+
+  /* H2 */
+  h2 {
+    @apply text-[32px] md:text-[40px] lg:text-[50px] font-semibold leading-snug;
+  }
+
+  /* H3 */
+  h3 {
+    @apply text-[22px] md:text-[26px] lg:text-[30px] font-bold leading-snug;
+  }
+
+  /* H5 */
+  h5 {
+    @apply text-[16px] md:text-[18px] lg:text-[20px] font-semibold leading-snug;
+  }
+
+  /* H6 */
+  h6 {
+    @apply text-[14px] md:text-[16px] lg:text-[18px] font-medium leading-snug;
+  }
+
+  /* Paragraph */
+  p {
+    @apply text-[16px] md:text-[17px] lg:text-[18px] leading-relaxed;
+  }
+}
+
