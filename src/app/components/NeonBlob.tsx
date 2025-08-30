@@ -1,6 +1,6 @@
 "use client";
 import * as THREE from "three";
-import { Canvas, useFrame, extend, Object3DNode } from "@react-three/fiber";
+import { Canvas, useFrame, extend } from "@react-three/fiber"; // ❌ removed Object3DNode import
 import { shaderMaterial } from "@react-three/drei";
 import { useRef } from "react";
 
@@ -48,10 +48,10 @@ const BlobMaterial = shaderMaterial(
 
 extend({ BlobMaterial });
 
-// ✅ Correct module augmentation (fixed `any` → `unknown[]`)
+// ✅ Correct module augmentation using ReactThreeFiber.Object3DNode
 declare module "@react-three/fiber" {
   interface ThreeElements {
-    blobMaterial: Object3DNode<
+    blobMaterial: ReactThreeFiber.Object3DNode<
       typeof BlobMaterial,
       typeof BlobMaterial extends new (...args: unknown[]) => infer T ? T : never
     >;
