@@ -74,7 +74,7 @@ export default function InfinitySection() {
           Download By App
         </button>
         <p className="md:text-[20px] text-base text-white">
-          Don't be Late today- Get Early Access Now
+          Do not be Late today- Get Early Access Now
         </p>
       </div>
     </section>

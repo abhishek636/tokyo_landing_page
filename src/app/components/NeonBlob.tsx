@@ -1,9 +1,8 @@
 // NeonBlob.tsx
 "use client";
 import * as THREE from "three";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, extend, Object3DNode } from "@react-three/fiber";
 import { shaderMaterial } from "@react-three/drei";
-import { extend } from "@react-three/fiber";
 import { useRef } from "react";
 
 // GLSL shaders
@@ -11,7 +10,7 @@ const BlobMaterial = shaderMaterial(
   {
     uTime: 0,
     uColorA: new THREE.Color("#04179f"), // Deep blue
-    uColorB: new THREE.Color("#ff00ffff"), // Magenta
+    uColorB: new THREE.Color("#ff00ff"), // Magenta
   },
   // Vertex Shader
   `
@@ -22,7 +21,6 @@ const BlobMaterial = shaderMaterial(
       vNormal = normal;
       vPosition = position;
 
-      // Organic distortion using sin noise
       float distortion = 0.3 * sin(uTime + position.y * 3.0) * cos(uTime * 0.5 + position.x * 2.0);
       vec3 newPosition = position + normal * distortion;
 
@@ -37,14 +35,12 @@ const BlobMaterial = shaderMaterial(
     varying vec3 vPosition;
 
     void main() {
-      // Gradient blend
       float grad = (vPosition.y + 1.0) * 0.5;
       vec3 color = mix(uColorB,uColorA, grad);
 
-      // Rim lighting (edge glow)
       float rim = 1.0 - max(dot(normalize(vNormal), vec3(0.0, 0.0, 1.0)), 0.0);
-      rim = pow(rim, 2.5); // softness
-      vec3 glow = vec3(1.0, 0.2, 1.0) * rim * 1.5; // neon magenta glow
+      rim = pow(rim, 2.5);
+      vec3 glow = vec3(1.0, 0.2, 1.0) * rim * 1.5;
 
       gl_FragColor = vec4(color + glow, 1.0);
     }
@@ -53,20 +49,22 @@ const BlobMaterial = shaderMaterial(
 
 extend({ BlobMaterial });
 
-// MOVE THIS DECLARATION AFTER extend() CALL
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      blobMaterial: any;
-    }
+// ✅ Correct module augmentation
+declare module "@react-three/fiber" {
+  interface ThreeElements {
+    blobMaterial: Object3DNode<
+      typeof BlobMaterial,
+      typeof BlobMaterial extends new (...args: any) => infer T ? T : never
+    >;
   }
 }
 
 function Blob() {
-  const ref = useRef<any>(null);
+  const ref = useRef<THREE.ShaderMaterial>(null!);
+
   useFrame(({ clock }) => {
     if (ref.current) {
-      ref.current.uTime = clock.getElapsedTime();
+      ref.current.uniforms.uTime.value = clock.getElapsedTime();
     }
   });
 

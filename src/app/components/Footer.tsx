@@ -113,7 +113,7 @@ export default function Footer() {
                 height={46}
               />{" "}
               <span>
-                Let's make a future
+                Lets make a future
                 <br className="hidden lg:block" />
                 together with Tokyo
               </span>

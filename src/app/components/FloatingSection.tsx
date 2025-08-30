@@ -45,9 +45,11 @@ export default function FloatingSection() {
             amplitude={20} // Custom amplitude
             className="z-10" // Additional classes
           >
-            <img
+            <Image
               src="/image 226.png"
               alt="Phone left"
+              width={500}   // required in Next.js Image
+              height={500}  // adjust according to actual image aspect ratio
               className="w-[250px] md:w-[500px] md:-mr-16 -mr-2 drop-shadow-2xl"
             />
           </FloatingBox>
@@ -57,9 +59,11 @@ export default function FloatingSection() {
             amplitude={25} // Different amplitude
             className="z-20" // Additional classes
           >
-            <img
+            <Image
               src="/image 227.png"
               alt="Phone right"
+              width={500} // required in Next.js Image
+              height={500} // adjust based on your actual image aspect ratio
               className="w-[250px] md:w-[500px] md:-ml-14 -ml-2 drop-shadow-2xl"
             />
           </FloatingBox>

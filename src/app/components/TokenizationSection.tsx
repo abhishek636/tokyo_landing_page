@@ -1,7 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import FloatingBox from "./FloatingBox";
 const NeonBlob = dynamic(() => import("@/app/components/NeonBlob"), { ssr: false });
 
 export default function TokenizationSection() {

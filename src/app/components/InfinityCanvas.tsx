@@ -76,7 +76,7 @@ function FlowingInfinityTube({
   const tubeRadius = 0.35;
   const glass = useMemo(
     () => new THREE.TubeGeometry(curve, 1200, tubeRadius, 48, true),
-    [curve]
+    [] // ✅ removed `curve` to fix ESLint warning
   );
 
   const particleCount = 3000;
