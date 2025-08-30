@@ -1,4 +1,3 @@
-// NeonBlob.tsx
 "use client";
 import * as THREE from "three";
 import { Canvas, useFrame, extend, Object3DNode } from "@react-three/fiber";
@@ -49,12 +48,12 @@ const BlobMaterial = shaderMaterial(
 
 extend({ BlobMaterial });
 
-// ✅ Correct module augmentation
+// ✅ Correct module augmentation (fixed `any` → `unknown[]`)
 declare module "@react-three/fiber" {
   interface ThreeElements {
     blobMaterial: Object3DNode<
       typeof BlobMaterial,
-      typeof BlobMaterial extends new (...args: any) => infer T ? T : never
+      typeof BlobMaterial extends new (...args: unknown[]) => infer T ? T : never
     >;
   }
 }

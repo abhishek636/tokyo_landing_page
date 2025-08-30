@@ -74,12 +74,16 @@ function FlowingInfinityTube({
   }, []);
 
   const tubeRadius = 0.35;
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const glass = useMemo(
     () => new THREE.TubeGeometry(curve, 1200, tubeRadius, 48, true),
-    [] // ✅ removed `curve` to fix ESLint warning
+    []
   );
 
   const particleCount = 3000;
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const particlesGeo = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
     const u0 = new Float32Array(particleCount);
@@ -111,7 +115,7 @@ function FlowingInfinityTube({
     g.setAttribute("phi", new THREE.BufferAttribute(phi, 1));
     g.setAttribute("color", new THREE.BufferAttribute(colors, 3));
     return g;
-  }, [curve]);
+  }, []);
 
   const tmpP = useMemo(() => new THREE.Vector3(), []);
   const tmpT = useMemo(() => new THREE.Vector3(), []);
