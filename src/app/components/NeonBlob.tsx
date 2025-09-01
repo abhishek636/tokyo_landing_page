@@ -4,6 +4,13 @@ import { Canvas, useFrame, extend } from "@react-three/fiber";
 import { shaderMaterial } from "@react-three/drei";
 import { useRef } from "react";
 
+// Define the type for our custom material
+type BlobMaterialType = {
+  uTime: number;
+  uColorA: THREE.Color;
+  uColorB: THREE.Color;
+} & THREE.ShaderMaterial;
+
 // GLSL shaders
 const BlobMaterial = shaderMaterial(
   {
@@ -44,12 +51,16 @@ extend({ BlobMaterial });
 
 declare module "@react-three/fiber" {
   interface ThreeElements {
-    blobMaterial: any;
+    blobMaterial: JSX.IntrinsicElements['shaderMaterial'] & {
+      uTime?: number;
+      uColorA?: THREE.Color;
+      uColorB?: THREE.Color;
+    };
   }
 }
 
 function Blob() {
-  const ref = useRef<any>(null);
+  const ref = useRef<BlobMaterialType>(null);
   useFrame(({ clock }) => {
     if (ref.current) {
       ref.current.uTime = clock.getElapsedTime();
