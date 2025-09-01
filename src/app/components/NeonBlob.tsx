@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { Canvas, useFrame, extend } from "@react-three/fiber";
 import { shaderMaterial } from "@react-three/drei";
 import { useRef } from "react";
+import type { JSX } from "react"; // ✅ Import JSX types from React
 
 // Define the type for our custom material
 type BlobMaterialType = {
@@ -51,7 +52,7 @@ extend({ BlobMaterial });
 
 declare module "@react-three/fiber" {
   interface ThreeElements {
-    blobMaterial: JSX.IntrinsicElements['shaderMaterial'] & {
+    blobMaterial: JSX.IntrinsicElements["shaderMaterial"] & {
       uTime?: number;
       uColorA?: THREE.Color;
       uColorB?: THREE.Color;
