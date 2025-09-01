@@ -1,4 +1,3 @@
-// NeonBlob.tsx
 "use client";
 import * as THREE from "three";
 import { Canvas, useFrame, extend } from "@react-three/fiber";
@@ -9,10 +8,9 @@ import { useRef } from "react";
 const BlobMaterial = shaderMaterial(
   {
     uTime: 0,
-    uColorA: new THREE.Color("#04179f"), // Deep blue
-    uColorB: new THREE.Color("#ff00ffff"), // Magenta
+    uColorA: new THREE.Color("#04179f"),
+    uColorB: new THREE.Color("#ff00ffff"),
   },
-  // Vertex Shader
   `
     uniform float uTime;
     varying vec3 vNormal;
@@ -20,15 +18,11 @@ const BlobMaterial = shaderMaterial(
     void main() {
       vNormal = normal;
       vPosition = position;
-
-      // Organic distortion using sin noise
       float distortion = 0.3 * sin(uTime + position.y * 3.0) * cos(uTime * 0.5 + position.x * 2.0);
       vec3 newPosition = position + normal * distortion;
-
       gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
     }
   `,
-  // Fragment Shader
   `
     uniform vec3 uColorA;
     uniform vec3 uColorB;
@@ -36,15 +30,11 @@ const BlobMaterial = shaderMaterial(
     varying vec3 vPosition;
 
     void main() {
-      // Gradient blend
       float grad = (vPosition.y + 1.0) * 0.5;
       vec3 color = mix(uColorB,uColorA, grad);
-
-      // Rim lighting (edge glow)
       float rim = 1.0 - max(dot(normalize(vNormal), vec3(0.0, 0.0, 1.0)), 0.0);
-      rim = pow(rim, 2.5); // softness
-      vec3 glow = vec3(1.0, 0.2, 1.0) * rim * 1.5; // neon magenta glow
-
+      rim = pow(rim, 2.5);
+      vec3 glow = vec3(1.0, 0.2, 1.0) * rim * 1.5;
       gl_FragColor = vec4(color + glow, 1.0);
     }
   `
@@ -52,7 +42,6 @@ const BlobMaterial = shaderMaterial(
 
 extend({ BlobMaterial });
 
-// Type declaration for the custom material
 declare module "@react-three/fiber" {
   interface ThreeElements {
     blobMaterial: any;
