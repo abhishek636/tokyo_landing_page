@@ -2,8 +2,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
-
+ 
 const features = [
   {
     title: "Assets Become Tokens",
@@ -29,7 +28,7 @@ const features = [
     image: "/image 242.svg",
   },
 ];
-
+ 
 export default function Token() {
   return (
     <section className="py-16 md:px-auto px-4 ">
@@ -42,7 +41,7 @@ export default function Token() {
       >
         What is Tokenization?
       </motion.h2>
-
+ 
       <div className="grid md:grid-cols-2 grid-rows-2 gap-4 max-w-[1096px] mx-auto ">
         {features.map((feature, i) => (
           <motion.div
@@ -58,19 +57,14 @@ export default function Token() {
                 <h3 className="text-white text-center card-title typing">{feature.title}</h3>
                 <p className="card-desc text-center">{feature.description}</p>
                 <div className="icon-wrap">
-                  <Image
-                    src={feature.image}
-                    alt={feature.title}
-                    fill
-                    className="icon object-contain"
-                  />
+                  <img src={feature.image} alt={feature.title} className="icon" />
                 </div>
               </div>
             </div>
           </motion.div>
         ))}
       </div>
-
+ 
       <style jsx>{`
         /* layout */
  

@@ -75,7 +75,7 @@ export default function ProfileTooltipSection() {
 
 
         {/* Button */}
-        <button className="flex items-center text-black gap-3 px-8 py-4 bg-white rounded-full shadow-md text-lg font-medium hover:bg-gray-100 transition">
+        <button className="flex items-center text-black gap-3 px-8 py-4 bg-white rounded-full text-lg font-medium hover:bg-gray-100 transition shadow-[0px_0px_10px_rgba(255,255,255,0.55)]">
           Join our Communities
           <Image src="/hands.png" alt="Arrow Right" width={34} height={34} />
         </button>
